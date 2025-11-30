@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio - Aashutosh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="brand">
+            <h1>AASHUTOSH SAPKOTA</h1>
+            <p>PORTFOLIO'25</p>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links">
+            <a href="#about">ABOUT</a>
+            <a href="#skills">SKILLS</a>
+            <a href="#projects">PROJECTS</a>
+            <a href="#contact">CONTACT</a>
+            <button class="resume-btn">RESUME</button>
+        </div>
+    </nav>
+
+    <header id="hero" class="main-section">
+        <video autoplay loop muted class="hero-video">
+            <source src="videos/background.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h2 class="main-title">A REDACTED USER DOING REDACTED THINGS</h2>
+            <div class="main-right">
+                <p class="main-description">Building intuition across decentralized architectures and their market dynamics.</p>
+                <p class="main-tagline">Unbounded acceleration.</p>
+                <div class="main-buttons">
+                    <button class="btn-collaborate">LET'S COLLABORATE</button>
+                    <button class="btn-hire">HIRE ME</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="content-section">
+        <h2>About</h2>
+        <p>Building intuition across decentralized architectures and their market dynamics. Passionate about blockchain technology and creating innovative solutions.</p>
+    </section>
+
+    <section id="skills" class="content-section">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-item">Redacted Technology</div>
+            <div class="skill-item">Classified Methodology</div>
+            <div class="skill-item">Undisclosed Expertise</div>
+            <div class="skill-item">Advanced Systems</div>
+        </div>
+    </section>
+
+    <section id="projects" class="content-section">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project">
+                <h3>Nepal Blood Requests</h3>
+
+                <p>Emergency blood request platform in support of GenZ protest. Used by Hami Nepal and others. Currently cleared up, but helped over 100 people reach their blood needs!</p>
+                <a href="https://nepalaccelerates.com/" target="_blank" class="project-link">Visit Platform</a>
+            </div>
+            <div class="project">
+                <h3>ZenBot</h3>
+                <p>MrZenBot on telegram, a user friendly bot that helps users manage their telegram groups withe ease! Over 100+ daily users in 100+ active groups.</p>
+                <button class="project-link disabled" disabled>View Project <span class="disabled-note">(link disabled for personal reasons)</span></button>
+            </div>
+            <div class="project">
+                <h3>NaccT</h3>
+                <p>Solidity based smart contract for a decentralized game that uses playnomics for tokenomics and has unlimited fun!</p>
+                <button class="project-link disabled" disabled>View Project <span class="disabled-note">(link disabled for personal reasons)</span></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="content-section">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Your message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <div id="form-message"></div>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; AASHUTOSH SAPKOTA <span id="year">2025</span></p>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
+        const navLinksItems = document.querySelectorAll('.nav-links a');
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+        });
+        
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                const isClickInsideNav = navLinks.contains(event.target);
+                const isClickOnToggle = menuToggle.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnToggle && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            }
+        });
+        
+        const contactForm = document.getElementById('contact-form');
+        const messageDiv = document.getElementById('form-message');
+        
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const nameInput = document.getElementById('name').value.trim();
+            const emailInput = document.getElementById('email').value.trim();
+            const messageInput = document.getElementById('message').value.trim();
+            
+            if (nameInput === '' || emailInput === '' || messageInput === '') {
+                messageDiv.textContent = 'You need to fill out all the fields.';
+                messageDiv.style.color = 'red';
+            } else {
+                messageDiv.textContent = 'Howdy! I will be in touch shortly.';
+                messageDiv.style.color = 'grey';
+                contactForm.reset();
+            }
+        }); 
+    </script>
+</body>
+</html>
+
